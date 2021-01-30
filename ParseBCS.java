@@ -1,7 +1,5 @@
 //package com.parser.app;
 
-import java.io.File;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -21,7 +19,7 @@ public class ParseBCS {
 			}
 	}
 	
-	
+	//получаем иназвание актива
 	public String getName(String link) {
 		String name = "";
 		getStrPrice(link);
@@ -36,7 +34,7 @@ public class ParseBCS {
 		return name;
 	}
 	
-	
+	//получем измение цены актива с начала дня
 	public double getChange() {
 		String change = "";
 		Double doubleChange = 0.0;
@@ -55,7 +53,7 @@ public class ParseBCS {
 		return doubleChange;
 		}
 	
-	
+	//получаем цену актива
 	public double getPrice(){
 		double price;
 		//String s;
