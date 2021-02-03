@@ -1,4 +1,4 @@
-//package com.parser.app;
+package com.parser.app;
 
 public class Main {
 	
@@ -9,7 +9,7 @@ public class Main {
 			while(true) {
 				dbworks.getCurrTime();
 						
-				// получем инфу в 8, 10, 12, 16, 20, 00 часов
+				// РїРѕР»СѓС‡РµРј РёРЅС„Сѓ РІ 8, 10, 12, 16, 20, 00 С‡Р°СЃРѕРІ
 				if (((DBWorks.hour == 8) & (DBWorks.minute == 0) & (DBWorks.second == 0)) || 
 						((DBWorks.hour == 10) & (DBWorks.minute == 0) & (DBWorks.second == 0)) ||
 						((DBWorks.hour == 12) & (DBWorks.minute == 0) & (DBWorks.second == 0)) ||

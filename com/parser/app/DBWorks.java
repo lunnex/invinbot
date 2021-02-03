@@ -1,4 +1,4 @@
-//package com.parser.app;
+package com.parser.app;
 
 import java.io.FileReader;
 import java.sql.Connection;
@@ -27,7 +27,7 @@ public class DBWorks {
 	public static int minute = 0;
 	public static int second = 0;
 	
-	//Получаем текущее время
+	//РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РµРµ РІСЂРµРјСЏ
 	public void getCurrTime() {
 		LocalDateTime localDate = LocalDateTime.now();
 		
@@ -38,73 +38,6 @@ public class DBWorks {
 		minute = localDate.getMinute();
 		second = localDate.getSecond();
 	}
-	
-	
-	/*public void morningPriceInsert() {
-		ArrayList<Thread> threads = new ArrayList<>();
-		ParseBCS parseBCS = new ParseBCS();
-		String s = "";
-		counter = 0;
-		
-			try {
-				Class.forName("org.sqlite.JDBC");
-				String dbase = "jdbc:sqlite:src/inv.db";
-				connection = DriverManager.getConnection(dbase);
-					
-				} catch(Exception e) {
-					System.out.println(e);
-				}
-					
-				try {
-				FileReader fileReader = new FileReader("src/links");
-				Scanner scan = new Scanner(fileReader);
-				while (scan.hasNextLine()) {
-					s = scan.nextLine();
-					final String str = s;
-					Thread thread = new Thread(new Runnable() {
-						public void run() {
-							name = parseBCS.getName(str);
-							price =  parseBCS.getPrice();
-							System.out.println(name);
-							System.out.println(price);
-							try {
-								// Добавляем в табличку morningPr инфу об утренних ценах
-								stm = connection.createStatement();
-								String sql = "insert into morningPr (a_name, a_price, day, month, year) values (?, ?, ?, ?, ?)";
-								PreparedStatement preparedStatement = connection.prepareStatement(sql);
-								preparedStatement.setString(1, name);
-								preparedStatement.setDouble(2, price);
-								preparedStatement.setInt(3, day);
-								preparedStatement.setInt(4, month);
-								preparedStatement.setInt(5, year);
-								preparedStatement.executeUpdate();
-								
-								// Добавляем в табличку infonow инфу об утренних ценах
-								String sqlinfonow = "update infonow set morningPrice = (?), morningSum = morningPrice*amount where a_ID = (?)";
-								PreparedStatement statementForInfoNow = connection.prepareStatement(sqlinfonow);
-
-								statementForInfoNow.setDouble(1, price);
-								statementForInfoNow.setDouble(2, counter);
-								statementForInfoNow.executeUpdate();
-									
-								counter ++;
-								System.out.println(counter);
-									
-							} catch (SQLException e) {
-								e.printStackTrace();
-							}
-						}
-						});
-					threads.add(thread);
-					}
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-				for (int i = 0; i < threads.size(); i++) {
-					threads.get(i).run();
-				}
-		}*/
-
 	
 	public void DBWorks() {
 		ArrayList<Thread> threads = new ArrayList<>();
@@ -126,7 +59,7 @@ public class DBWorks {
 		Scanner scan = new Scanner(fileReader);
 		while (scan.hasNextLine()) {
 			link = scan.nextLine();
-			final String str = link; // Ссылка на актив
+			final String str = link; // РЎСЃС‹Р»РєР° РЅР° Р°РєС‚РёРІ
 			Thread thread = new Thread(new Runnable() {
 				public void run() {
 					System.out.println (str);
@@ -140,10 +73,10 @@ public class DBWorks {
 						Date date = new Date();
 						
 						if ((hour == 10) & (minute == 0) & (second == 0)){
-							counter ++; //счетчик ID элемента
+							counter ++; //СЃС‡РµС‚С‡РёРє ID СЌР»РµРјРµРЅС‚Р°
 							System.out.println(counter);
 							
-							// Добавляем в табличку morningPr инфу об утренних ценах
+							// Р”РѕР±Р°РІР»СЏРµРј РІ С‚Р°Р±Р»РёС‡РєСѓ morningPr РёРЅС„Сѓ РѕР± СѓС‚СЂРµРЅРЅРёС… С†РµРЅР°С…
 							String sql = "insert into morningPr (a_name, a_price, day, month, year) values (?, ?, ?, ?, ?)";
 							PreparedStatement preparedStatement = connection.prepareStatement(sql);
 							preparedStatement.setString(1, name);
@@ -153,7 +86,7 @@ public class DBWorks {
 							preparedStatement.setInt(5, year);
 							preparedStatement.executeUpdate();
 							
-							// Добавляем в табличку infonow инфу об утренних ценах
+							// Р”РѕР±Р°РІР»СЏРµРј РІ С‚Р°Р±Р»РёС‡РєСѓ infonow РёРЅС„Сѓ РѕР± СѓС‚СЂРµРЅРЅРёС… С†РµРЅР°С…
 							String sqlinfonow = "update infonow set morningPrice = (?), morningSum = morningPrice*amount where a_ID = (?)";
 							PreparedStatement statementForInfoNow = connection.prepareStatement(sqlinfonow);
 
@@ -162,9 +95,9 @@ public class DBWorks {
 							statementForInfoNow.executeUpdate();
 							
 						}else {
-							//Добавляем в таблицу inv информацию об активах и их цене
+							//Р”РѕР±Р°РІР»СЏРµРј РІ С‚Р°Р±Р»РёС†Сѓ inv РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± Р°РєС‚РёРІР°С… Рё РёС… С†РµРЅРµ
 							
-							counter ++; //счетчик ID элемента
+							counter ++; //СЃС‡РµС‚С‡РёРє ID СЌР»РµРјРµРЅС‚Р°
 							System.out.println(counter);
 							
 							String sql = "insert into inv (datetime, a_name, a_price, a_change, year, month, day, hour, minute, second) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -192,7 +125,7 @@ public class DBWorks {
 					}
 				}
 			});
-			threads.add(thread); // Добавляем созданный поток в массив потоков
+			threads.add(thread); // Р”РѕР±Р°РІР»СЏРµРј СЃРѕР·РґР°РЅРЅС‹Р№ РїРѕС‚РѕРє РІ РјР°СЃСЃРёРІ РїРѕС‚РѕРєРѕРІ
 			}
 		} catch (Exception e) {
 			System.out.println(e);
