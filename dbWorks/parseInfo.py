@@ -72,8 +72,8 @@ def transaction(strurl, quantyOfLinks, linkPath):
     cursor = connection.cursor()
 
     try:
-        cursor.execute('update infonow set a_price = (?) where a_name = (?)', (price, name))
-        cursor.execute('update infonow set change = (?) where a_name = (?)', (change, name))
+        cursor.execute(f'update infonow set a_price = (?) where a_name = (?)', (price, name))
+        cursor.execute(f'update infonow set change = (?) where a_name = (?)', (change, name))
         connection.commit()
     except:
         print('error')
